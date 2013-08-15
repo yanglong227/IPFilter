@@ -223,11 +223,6 @@ bool Filter::IfAccept()   //false:accept, true:not accept
 
     unsigned int inetSum = inet_addr(m_IP);
     unsigned int IPSum = ntohl(inetSum);
-    /*unsigned int IPSum = IP2Unsignedint(m_IP);
-    if(inetSum != IPSum)
-    {
-    cout<<inetSum<<","<<IPSum<<","<<m_IP<<","<<charIP<<endl;
-    }*/
     unsigned int headId = IPSum % HASH_UNIT;
     if(NULL == (*m_hashHead)[headId])
     {
