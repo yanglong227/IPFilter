@@ -1,0 +1,10 @@
+#! /usr/local/bin/bash
+
+for file in ./*
+do
+name=${file%.*}
+name=${name#*/}
+echo $name
+mv $file $name
+done
+
