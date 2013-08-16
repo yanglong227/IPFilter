@@ -21,7 +21,7 @@ class Filter
          bool IfValidateIP(const char *  IP);
          bool HasMask(const char * IPAddress);
          int GetMaskBit(const char * IP);
-         unsigned int IP2Unsignedint(const char * IP);
+         unsigned int IP2Unsignedint(char * IP);
          bool IfAccept();
 
          bool MatchIP();

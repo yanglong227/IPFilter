@@ -35,6 +35,7 @@ bool Filter::GetIPFromQuery(const char * query)
     char * targetPointer = strstr(query,"ip=");
     if(targetPointer == NULL)
         return true;
+
     int offset = targetPointer - query;
     char * IPendPointer = strstr((query + offset),"&"); 
     if(IPendPointer == NULL)
@@ -72,9 +73,9 @@ bool Filter::IfValidateIP(const char * IP)
 }
 
 
-unsigned int Filter::IP2Unsignedint(const char * IP)
+unsigned int Filter::IP2Unsignedint(char * IP)
 {
-    char charIP[50];
+    /*char charIP[50];
     int i = 0;
     while(*(IP + i) != '\0')
     {
@@ -82,11 +83,11 @@ unsigned int Filter::IP2Unsignedint(const char * IP)
         ++i;
     }
     charIP[i] = '\0';
-    
+    */
     const char *d = ".";
     int intgerResult[4];
-    char * p = strtok(charIP,d);
-    i = 0;
+    char * p = strtok(IP,d);
+    int i = 0;
     while(p)
     {
         intgerResult[i++] = atoi(p);
