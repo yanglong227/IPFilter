@@ -1,6 +1,6 @@
 OBJ=main.o filter.o
 Filter: $(OBJ)
-	g++ -g -o Filter main.o filter.o
+	g++ -g -O2 -o Filter main.o filter.o
 main.o: main.cpp
 	g++ -g -c main.cpp
 filter.o: filter.h filter.cpp

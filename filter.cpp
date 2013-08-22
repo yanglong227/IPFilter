@@ -37,10 +37,13 @@ bool Filter::GetIPFromQuery(const char * query)
         return true;
 
     int offset = targetPointer - query;
-    char * IPendPointer = strstr((query + offset),"&"); 
+    //char * IPendPointer = strstr((query + offset),"&"); 
+    char * IPendPointer = strchr((query + offset), '&');
     if(IPendPointer == NULL)
     {
-        IPendPointer  = strstr((query + offset),"\n");
+        //IPendPointer  = strstr((query + offset),"\n");
+
+        IPendPointer  = strchr((query + offset),'\n');
     }
     
     int i = 0;
