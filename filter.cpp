@@ -71,7 +71,7 @@ bool Filter::GetIPFromQuery(const char * query)
 }
 
 
-bool Filter::HasMask(const char * IP)
+bool Filter::HasMask(const char * IP) // false: does not have mask, true:have mask
 {
     int i = 0;
     while(*(IP + i)!= '\0' && IP[i] != '/')
@@ -92,20 +92,19 @@ bool Filter::IfValidateIP(const char * IP)
 
 unsigned int Filter::IP2Unsignedint(char * IP)
 {
-    char charIP[50];
+    /*char charIP[50];
     int i = 0;
     while(*(IP + i) != '\0')
     {
         charIP[i] = *(IP +i);
         ++i;
     }
-    charIP[i] = '\0';
-    
+    charIP[i] = '\0';*/
+
     const char *d = ".";
     int intgerResult[4];
     char * p = strtok(IP,d);
-    
-    i = 0;
+    int i = 0;
     while(p)
     {
         intgerResult[i++] = atoi(p);
@@ -130,7 +129,6 @@ unsigned int Filter::IP2Unsignedint(char * IP)
             ++binaryBit;
         }
     }
-    //the IP must has mask when IP2Unsignedint was called
     /*if(!HasMask(charIP))
     {
         maskShift = 0;
@@ -231,6 +229,16 @@ bool Filter::IfAccept()   //false:accept, true:not accept
     {
         return false;
     }
+/*    char charIP[20];
+    int i = 0;
+    while(m_IP[i] != '\0')
+    {
+        charIP[i] = m_IP[i];
+        ++i;
+    }
+    charIP[i] = '\0';
+
+*/
     unsigned int inetSum = inet_addr(m_IP);
     unsigned int IPSum = ntohl(inetSum);
     unsigned int headId = IPSum % HASH_UNIT;
