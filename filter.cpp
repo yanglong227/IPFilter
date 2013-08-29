@@ -41,6 +41,7 @@ Filter::~Filter()
            }
 
        }
+       delete m_hashHead;
    }
 }
 
