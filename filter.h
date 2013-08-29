@@ -33,10 +33,11 @@ class Filter
     private:
         char m_ruleFilePath[MAX_PATH_LENGTH];
         char m_queryFilePath[MAX_PATH_LENGTH];
-        //vector<string> m_splitResult;
 
+        
         char m_IP[20];
 
+//        vector<string> m_splitResult;
         int m_acceptCount;
         int m_totalQuery;
         

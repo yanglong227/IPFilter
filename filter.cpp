@@ -27,9 +27,21 @@ Filter::Filter(const char * rulePath, const char * queryPath)
     m_queryFilePath[i] = '\0';
 }
 
-~Filter()
+Filter::~Filter()
 {
-    
+   if(m_hashHead != NULL)
+   {
+       for(vector<vector<unsigned int>*>::iterator it = (*m_hashHead).begin();
+               it != (*m_hashHead).end(); 
+               ++it)
+       {
+           if((*it) != NULL)
+           {
+               delete (*it);
+           }
+
+       }
+   }
 }
 
 bool Filter::GetIPFromQuery(const char * query)
@@ -41,12 +53,9 @@ bool Filter::GetIPFromQuery(const char * query)
         return true;
 
     int offset = targetPointer - query;
-    //char * IPendPointer = strstr((query + offset),"&"); 
     char * IPendPointer = strchr((query + offset), '&');
     if(IPendPointer == NULL)
     {
-        //IPendPointer  = strstr((query + offset),"\n");
-
         IPendPointer  = strchr((query + offset),'\n');
     }
     
@@ -82,7 +91,7 @@ bool Filter::IfValidateIP(const char * IP)
 
 unsigned int Filter::IP2Unsignedint(char * IP)
 {
-    /*char charIP[50];
+    char charIP[50];
     int i = 0;
     while(*(IP + i) != '\0')
     {
@@ -90,11 +99,12 @@ unsigned int Filter::IP2Unsignedint(char * IP)
         ++i;
     }
     charIP[i] = '\0';
-    */
+    
     const char *d = ".";
     int intgerResult[4];
     char * p = strtok(IP,d);
-    int i = 0;
+    
+    i = 0;
     while(p)
     {
         intgerResult[i++] = atoi(p);
@@ -119,7 +129,8 @@ unsigned int Filter::IP2Unsignedint(char * IP)
             ++binaryBit;
         }
     }
-    /*if(!HasMask(IP))
+    //the IP must has mask when IP2Unsignedint was called
+    /*if(!HasMask(charIP))
     {
         maskShift = 0;
         printf("error\n");
@@ -219,16 +230,6 @@ bool Filter::IfAccept()   //false:accept, true:not accept
     {
         return false;
     }
-    char charIP[20];
-    int i = 0;
-    while(m_IP[i] != '\0')
-    {
-        charIP[i] = m_IP[i];
-        ++i;
-    }
-    charIP[i] = '\0';
-
-
     unsigned int inetSum = inet_addr(m_IP);
     unsigned int IPSum = ntohl(inetSum);
     unsigned int headId = IPSum % HASH_UNIT;
