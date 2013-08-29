@@ -27,6 +27,10 @@ Filter::Filter(const char * rulePath, const char * queryPath)
     m_queryFilePath[i] = '\0';
 }
 
+~Filter()
+{
+    
+}
 
 bool Filter::GetIPFromQuery(const char * query)
 {

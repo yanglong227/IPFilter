@@ -13,7 +13,7 @@ class Filter
 {
     public:
          Filter(const char * , const char * );
-         ~Filter(){}
+         ~Filter();
     public :
          bool   ConstructRule();
          bool GetIPFromQuery(const char *);
@@ -33,7 +33,7 @@ class Filter
     private:
         char m_ruleFilePath[MAX_PATH_LENGTH];
         char m_queryFilePath[MAX_PATH_LENGTH];
-        vector<string> m_splitResult;
+        //vector<string> m_splitResult;
 
         char m_IP[20];
 
